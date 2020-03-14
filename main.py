@@ -37,7 +37,7 @@ while True:
 		os.system('sudo add-apt-repository ppa:ondrej/php -y')
 
 		print("\n--------------- adicionando o repositório do Sublime Text")
-		os.system('echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list -y')
+		os.system('echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list')
 
 		print("\n--------------- instalando o Apache2, PHP 7.4, Postgre, Sublime Text e o módulo PDO")
 		os.system('sudo apt install apache2 php7.4 php7.4-pgsql postgresql postgresql-contrib pgadmin4 pgadmin4-apache2 sublime-text -y')
@@ -45,6 +45,19 @@ while True:
 		print("\n--------------- instalando PG Admin 4")
 		os.system('sudo apt-get install wget ca-certificates -y')
 
+		print("\n--------------- instalando Certbot")
+		os.system('sudo apt-get install software-properties-common -y')
+		os.system('sudo add-apt-repository universe -y')
+		os.system('sudo add-apt-repository ppa:certbot/certbot -y')
+		os.system('sudo apt-get update')
+		os.system('sudo apt-get install certbot python-certbot-apache -y')
+
+		print("\n--------------- instalando Lets Encrypt")
+		os.system('sudo apt-get install letsencrypt')
+
+		print("\n--------------- removendo o desnecessário")
+		os.system('sudo apt autoremove -y')
+		
 		print("\n--------------- reiniciando o apache")
 		os.system('sudo service apache2 restart')
 
@@ -86,6 +99,9 @@ while True:
 
 		print('\n\n-------------- verificando sublime-text\n')
 		os.system('sublime-text.subl --version')
+
+		print('\n\n-------------- verificando certbot\n')
+		os.system('certbot --version')
 
 		print('\n\n-------------- pronto, todos os programas verificados.\n')
 		input()
